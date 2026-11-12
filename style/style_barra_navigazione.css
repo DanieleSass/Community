@@ -1,0 +1,75 @@
+
+.barra_navigazione {
+    position: fixed;    /* barra fissa in alto allo schermo anche se scrolli*/
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+
+    background-color: #3498db;
+
+    display: flex;  /* un elemento affianco all' altro*/
+    align-items: center;    /*centrato verticalmente*/
+
+    padding: 0 20px;    /*padding a destra e a sinistra*/
+
+    z-index: 1000;  /*valore che indica l'ordine di sovrapposizione, numero alto->sopra ai numeri bassi->copre i componenti 
+    con z bassi-> barra copre sempre schermo*/
+
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);   /*effetto ombra*/
+}
+
+/*la scritta tipo community musica*/
+.barra_navigazione .logo {
+    color: white;
+    font-size: 1.2rem;  /*dim esto a 1,2 volte la dim font dell'elemento radice (<html>) della pagina (di solito fisso a 16px)
+    font-weight: bold;
+
+    flex: 0 0 20%;  /*occupa il 20% della barra*/
+    text-align: center; /*relativamente al suo spazio, il testo viene centrato*/
+}
+
+
+.barra_navigazione .link {
+    list-style: none;   /*rimuove i puntini neri dell' elenco*/
+
+    display: flex;  /*mette i vari componenti in riga*/
+
+    /*occupa tutto lo spazio rimanente non preso dal logo*/
+    flex: 1;
+    height: 100%;
+}
+
+
+.barra_navigazione .link li {
+    flex: 1;    /*ogni opzione del menu occupa la stessa porzione di spazio*/
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.barra_navigazione .link li a {
+    display: flex;
+
+    width: 100%;    /*occupa tutto lo spazio possibile*/
+    height: 100%;
+
+    align-items: center;        /*centra vertic*/
+    justify-content: center;    /*centra orizzont*/
+
+    color: white;
+    text-decoration: none;
+
+    font-size: 1rem;
+    font-weight: 500;
+
+    transition: background-color 0.2s ease;
+}
+
+/* hover ->quando passi sopra con il mouse*/
+.barra_navigazione .link li a:hover {
+    background-color: #217dbb;
+}
+

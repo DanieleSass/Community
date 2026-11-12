@@ -1,0 +1,168 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; 
+    /*reset iniziale della pagina, azzera margini e padding*/
+}
+
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f7f6;
+    color: #333;
+    padding-top: 80px;  /*per evitare che contenuto della pagina finisca sotto la barra*/
+}
+
+
+/* il ">" serve per dire di prendere tuti i form della pagina come se scrivessi "body form"
+ma solo quelli che hanno come diretto padre il body e non sono incastrati dentro altri tag*/
+body > form {
+    width: 90%; /*occupa 90% pagine*/
+    margin: 25px auto;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+
+    display: flex;  /*mette gli elementi in riga e distanziati l'uno dall'altro di 12px*/
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;    /*con questo gli elementi vanno direttamente a capo in caso di aggiunta di nuovi filtri*/
+}
+
+/*a tutte le label dentro un form il cui padre è il body*/
+body > form label {
+    font-weight: bold;
+}
+
+body > form select {
+    padding: 9px 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    color: #333;
+    cursor: pointer;
+}
+
+/*quando clicco su un opzione del menu a tendina dei filtri*/
+body > form select:focus {
+    outline: none;  /*è il bordo azzurro intorno a un tag usato x esempio da persone con disabilità visive*/
+    border-color: #3498db;
+}
+
+body > form a {
+    padding: 9px 14px;
+    text-decoration: none;
+    color: white;
+    background-color: #3498db;
+    border-radius: 5px;
+}
+
+body > form a:hover {
+    background-color: #217dbb;
+}
+
+
+
+/* tabelle */
+table {
+    width: 90%;
+    margin: 30px auto;
+    border-collapse: collapse;  /*unisce i bordi delle celle*/
+    background-color: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+
+
+/* intestazioni */
+table thead {
+    background-color: #3498db;
+    color: white;
+}
+
+table th {
+    padding: 14px 12px;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* singole cellee */
+table td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+/* per fare le righe colorate in maniera alternata */
+
+/*righe pari le colora di grigio/azzurro*/
+table tbody tr:nth-child(even) {
+    background-color: #f2f6f8;
+}
+
+/* quando passi sopra con il mouse alla riga*/
+table tbody tr:hover {
+    background-color: #e3f2fd;
+}
+
+/* ultima riga della tabella non ha bordo*/
+table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* immagini (artisti, copertine) dentro la tab */
+table img {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;  /*evita che img venga deformata se le proporzioni sono diverse*/
+    border-radius: 8px;
+}
+
+/* link+pulsanti nelle tabelle*/
+table a,
+table button {
+    display: inline-block;  /*componenti come piccoli blocchi in fila*/
+    margin: 3px;
+    padding: 6px 10px;
+    text-decoration: none;  /*toglie sottolineatura dei link*/
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+/* link x modifica */
+table a {
+    background-color: #3498db;
+}
+
+table a:hover {
+    background-color: #217dbb;
+}
+
+/* pulsante x eliminare */
+table button {
+    background-color: #e74c3c;
+}
+
+table button:hover {
+    background-color: #c0392b;
+}
+
+
+/* form eliminazione nelle tabelle */
+table form {
+    /*azzera tutte le impsotazioni grafiche del form x eliminare (che viene visto come un pulsante)
+    x evitare di perdere continutà con tabella*/
+    display: inline;
+    margin: 0;
+    padding: 0;
+    background: none;
+    box-shadow: none;
+    border-radius: 0;
+}

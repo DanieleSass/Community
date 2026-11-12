@@ -1,0 +1,133 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f7f6;
+    color: #333;
+    padding-top: 80px;
+}
+
+/* form principale*/
+.form-artista,
+.form-album,
+.form-canzone {
+    background-color: white;
+    width: 90%;
+    max-width: 550px;   /*non supera mail 550px*/
+    margin: 25px auto;  /*centrato*/
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* titoli/sottotitoli */
+.form-artista h2,
+.form-album h2,
+.form-canzone h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.form-artista h3,
+.form-album h3,
+.form-canzone h3 {
+    color: #333;
+    border-bottom: 1px solid #ddd;  /*permette di separare un po*/
+    padding-bottom: 8px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+/* input di testo/numero/selezione */
+.form-artista input[type="text"],
+.form-artista input[type="number"],
+.form-album input[type="text"],
+.form-album input[type="number"],
+.form-canzone input[type="text"],
+.form-canzone input[type="number"],
+.form-canzone select {
+    /*fa occupare tutto lo spazio possibile*/
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0 15px;
+
+    border: 1px solid #ccc; 
+    border-radius: 5px;
+    font-family: inherit;   /*prende il font dal resto della pagina*/
+    font-size: 14px;        
+}
+
+/* campi dove si inserisci il file */
+.form-artista input[type="file"],
+.form-album input[type="file"] {
+    margin: 10px 0 15px;    /*gestisce spazio intorno*/
+    max-width: 100%;
+}
+
+/* label */
+.form-artista label,
+.form-album label,
+.form-canzone label {
+    color: #444;
+    font-size: 14px;
+}
+
+/* checkbox */
+.form-artista input[type="checkbox"],
+.form-album input[type="checkbox"],
+.form-canzone input[type="checkbox"] {
+    margin: 8px;
+    cursor: pointer;
+}
+
+/* testo normale/paragrafo */
+.form-artista p,
+.form-album p,
+.form-canzone p {
+    margin: 10px 0;
+    color: #555;
+}
+
+/* pulsante salvataggio */
+.form-artista button,
+.form-album button,
+.form-canzone button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 15px;
+    background-color: #252525;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    font-family: inherit;
+    font-size: 14px;
+}
+
+.form-artista button:hover,
+.form-album button:hover,
+.form-canzone button:hover {
+    background-color: #444;
+}
+
+/* pulsante elimina */
+#pulsante_elimina {
+    display: block;         /*comportamente come un blocco*/
+    width: fit-content;     /*è grande quanto basta per fare entrare il testo*/
+    margin: 30px auto;
+    padding: 12px 20px;
+    background-color: #b52b2b;
+    color: white;
+    text-decoration: none;  /*no sottolineature o altre cose/dettagli*/
+    border-radius: 5px;
+}
+
+#pulsante_elimina:hover {
+    background-color: #8e2020;
+}
