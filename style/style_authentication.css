@@ -1,0 +1,90 @@
+.form-login,
+.form-register {
+    background-color: white;
+    width: 90%;         /*90% dello spazio disponibile*/
+    max-width: 450px;   /*ma non oltre i 450 px*/
+    margin: 40px auto;  /*40px di margine su/giu, margine auto a dx/sx per centrarlo*/
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);  
+    /*spostamento orizzontale, spostamento verticale, sfocatura, colore nero e trasparenza 10%*/
+}
+
+/*titoli*/
+.form-login h2,
+.form-register h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #333;
+    font-size: 24px;
+}
+
+.form-login label,
+.form-register label {
+    display: block; /*considerato come un blocco->occupa una riga*/
+    margin-bottom: 8px;
+    color: #444;
+    font-size: 14px;
+    font-weight: 600;   /*grassetto*/
+}
+
+.form-login input[type="text"],
+.form-login input[type="password"],
+.form-register input[type="text"],
+.form-register input[type="password"]{
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-family: inherit;
+    font-size: 14px;
+    background-color: #f9f9f9;
+}
+
+.form-login input:focus,
+.form-register input:focus {
+    outline: none;  /*toglie contorno default del browser*/
+    border-color: #3498db;
+    background-color: white;
+}
+
+.form-login button,
+.form-register button {
+    width: 100%;
+    padding: 12px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    font-family: inherit;
+    font-size: 15px;
+    transition: background-color 0.2s;
+}
+
+.form-login button:hover,
+.form-register button:hover {
+    background-color: #217dbb;
+}
+
+/*link per spostarsi da accedi->registrati viceversa*/
+.form-login .auth-link,
+.form-register .auth-link {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+.form-login .auth-link a,
+.form-register .auth-link a {
+    color: #3498db;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.form-login .auth-link a:hover,
+.form-register .auth-link a:hover {
+    text-decoration: underline; /*quando passo sopra compare la sottolineatura*/
+}

@@ -3,9 +3,12 @@
 //obblica di inlcludere il file (le classi)
 //inluderlo una sola volta
 //DIR restituisce la cartella in cui si trova progetto -> /var/wwww/file
+//genera errore e interrompe esecuzione se file nonesiste
 require_once __DIR__ . '/classi/Artista.php';
 require_once __DIR__ . '/classi/Album.php';
 require_once __DIR__ . '/classi/Canzone.php';
+
+    
 
     try {
         $pdo = new PDO(
@@ -14,65 +17,7 @@ require_once __DIR__ . '/classi/Canzone.php';
             getenv("DB_PASSWORD")
         );
 
-        //eliminazione artista                          
-
-        //verifica che nella richiesta POST esista 
-        //il parametro eliminaartista e che sia != null -> se è così da true
-
-        //il POST['xxx'] (seconda condizione) controlla quale componente lo hai invocato 
-        //attraverso il "name= " -> nel caso delle eliminazioni è stato il pulsante all' intenro del form
-        if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['eliminaArtista'])) {
-
-            $id = $_POST['id']; //questo valore lo riprende grazie al <input hidden ecc> messo dentro al form
-
-            //queste sono le tabelle ponte
-            $query = $pdo->prepare("DELETE FROM Produce WHERE IdArtista = ?");
-            $query->execute([$id]);
-
-            $query = $pdo->prepare("DELETE FROM Compone WHERE IdArtista = ?");
-            $query->execute([$id]);
-
-            $query = $pdo->prepare("DELETE FROM Artista WHERE IdArtista = ?");
-            $query->execute([$id]);
-
-            header("Location: index.php");  //riporta sempre a sto pagina
-            exit;   //come return
-        }
-
-        //eliminazione album
-        if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['eliminaAlbum'])) {
-
-            $id = $_POST['id'];
-
-            $query = $pdo->prepare("DELETE FROM Produce WHERE IdAlbum = ?");
-            $query->execute([$id]);
-
-            $query = $pdo->prepare("DELETE FROM Canzone WHERE IdAlbum = ?");
-            $query->execute([$id]);
-
-            $query = $pdo->prepare("DELETE FROM Album WHERE IdAlbum = ?");
-            $query->execute([$id]);
-
-            header("Location: index.php");
-            exit;
-        }
-
-        //eliminazione canzone
-        if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['eliminaCanzone'])) {
-
-            $id = $_POST['id'];
-
-            $query = $pdo->prepare("DELETE FROM Compone WHERE IdCanzone = ?");
-            $query->execute([$id]);
-
-            $query = $pdo->prepare("DELETE FROM Canzone WHERE IdCanzone = ?");
-            $query->execute([$id]);
-
-            header("Location: index.php");
-            exit;
-        }
-
-
+        
         //recupera le opzioni che verranno poi inserite nel menu a tendina per gestire i filtri 
         $sql_artista_filtro = "SELECT * FROM Artista ORDER BY NomeArte";
         $query_artista_filtro = $pdo->query($sql_artista_filtro);
@@ -385,7 +330,7 @@ require_once __DIR__ . '/classi/Canzone.php';
                 echo '<td>';
 
                 if (!empty($artista->getFoto())) {
-                    echo '<img src="/'   .   htmlspecialchars($artista->getFoto())   .   '">';
+                    echo '<img src="/images/'   .   htmlspecialchars($artista->getFoto())   .   '">';
                 } else {
                     echo 'Nessuna foto';
                 }
@@ -402,7 +347,7 @@ require_once __DIR__ . '/classi/Canzone.php';
                 
                 //la " \" serve per poter inserire apostrofo e quindi stringa senza chiudere la stringa che la contiene (quindi tag html)
                 //per modificare il db uso il metodo post, che è associabile a un form
-                echo '<form method="POST" action="index.php" onsubmit="return confirm(\'Sicuro?\');">';
+                echo '<form method="POST" action="delete.php" onsubmit="return confirm(\'Sicuro?\');">';
                 echo '<input type="hidden" name="id" value="' . $artista->getIdArtista() . '">';
                 echo '<button type="submit" name="eliminaArtista">Elimina</button>';
                 echo '</form>';
@@ -455,7 +400,7 @@ require_once __DIR__ . '/classi/Canzone.php';
                 echo '<td>';
                 echo '<a href="add.php?tipo=canzone&id=' . $canzone->getIdCanzone() . '">Modifica</a>';
 
-                echo '<form method="POST" action="index.php" onsubmit="return confirm(\'Sicuro?\');">';
+                echo '<form method="POST" action="delete.php" onsubmit="return confirm(\'Sicuro?\');">';
                 echo '<input type="hidden" name="id" value="' . $canzone->getIdCanzone() . '">';
                 echo '<button type="submit" name="eliminaCanzone">Elimina</button>';
                 echo '</form>';
@@ -493,7 +438,7 @@ require_once __DIR__ . '/classi/Canzone.php';
                 
                 echo '<td>';
                 if (!empty($albumPreciso->getCopertina())) {
-                    echo '<img src="/' . htmlspecialchars($albumPreciso->getCopertina()) .   '">';
+                    echo '<img src="/images/' . htmlspecialchars($albumPreciso->getCopertina()) .   '">';
                 }
                 else{
                     echo 'Nessuna foto';
@@ -504,7 +449,7 @@ require_once __DIR__ . '/classi/Canzone.php';
                 echo '<td>';
                 echo '<a href="add.php?tipo=album&id=' . $albumPreciso->getIdAlbum() . '">Modifica</a>';
                 
-                echo '<form method="POST" action="index.php" onsubmit="return confirm(\'Sei sicuro?\');">';
+                echo '<form method="POST" action="delete.php" onsubmit="return confirm(\'Sei sicuro?\');">';
                 echo '<input type="hidden" name="id" value="' . $albumPreciso->getIdAlbum() . '">';
                 echo '<button type="submit" name="eliminaAlbum">Elimina</button>';
                 echo '</form>';

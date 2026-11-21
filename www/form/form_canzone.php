@@ -53,13 +53,13 @@ $artisti = $query->fetchAll(PDO::FETCH_OBJ);
     <input type="text" name="titolo" placeholder="Titolo canzone"
         value="<?php echo htmlspecialchars($canzone ? $canzone->getTitolo() : ''); ?>" required>
 
-    <input type="number" name="anno" placeholder="Anno"
+    <input type="number" name="anno" placeholder="Anno" min="1500" max="<?php echo date('Y'); ?>"
         value="<?php echo htmlspecialchars($canzone ? $canzone->getAnno() : ''); ?>" required>
 
-    <input type="number" name="durata" placeholder="Durata (secondi)"
+    <input type="number" name="durata" placeholder="Durata (secondi)" min="10"
         value="<?php echo htmlspecialchars($canzone ? $canzone->getDurata() : ''); ?>">
 
-    <input type="number" name="ascolti" placeholder="Numero ascolti"
+    <input type="number" name="ascolti" placeholder="Numero ascolti" min="0"
         value="<?php echo htmlspecialchars($canzone ? $canzone->getAscolti() : ''); ?>">     
 
     <label>

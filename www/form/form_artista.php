@@ -82,7 +82,7 @@ $canzoni = $query->fetchAll(PDO::FETCH_OBJ);
     <input type="text" name="nomeArte" placeholder="Nome d'Arte"
         value="<?php echo htmlspecialchars($artista ? $artista->getNomeArte() : ''); ?>" required>
 
-    <input type="number" name="eta" placeholder="Età"
+    <input type="number" name="eta" placeholder="Età" min="10" max="120"
         value="<?php echo htmlspecialchars($artista ? $artista->getEta() : ''); ?>">
 
     <input type="text" name="nazionalita" placeholder="Nazionalità"

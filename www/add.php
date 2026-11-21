@@ -5,6 +5,14 @@ require_once __DIR__ . '/classi/Artista.php';
 require_once __DIR__ . '/classi/Album.php';
 require_once __DIR__ . '/classi/Canzone.php';
 
+   session_start();
+    if (!isset($_SESSION['username'])) {
+        session_unset();
+        session_destroy();
+        header("Location: /authentication/login.php");
+        exit;
+    }     
+
    $pdo = new PDO(
             "mysql:host=db;dbname=community;charset=utf8mb4",
             getenv("DB_USER"),
@@ -58,11 +66,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $nome = $_POST['nome'];
         $cognome = $_POST['cognome'];
         $nomeArte = $_POST['nomeArte'];
-        
+
+        if ($nome == '' || $cognome == '' || $nomeArte == '') {
+            die("Nome, cognome e nome d'arte sono obbligatori");
+        }
+
+
         $eta = null;    //siccome è un numero prima setto a null, siccome è nullable nel db e poi eventualmente valorizzo
 
         if ($_POST['eta'] != '') {
             $eta = $_POST['eta'];
+            if($eta < 10 || $eta > 120){
+                die("Età non valida");
+            }
         }
 
         $nazionalita = $_POST['nazionalita'];
@@ -82,7 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             //sposta file dentro cartella "images"
             if (move_uploaded_file($_FILES['foto']['tmp_name'], $cartella . $nomeFile)) {
                  //salva nella variabile x poi mettere il valore (percorso img) nel db
-                $foto = $cartella . $nomeFile;  //sovrascrive quella vecchia
+                $foto = $nomeFile;  //sovrascrive quella vecchia
             } else {
                 die("Errore durante lo spostamento del file");
             }
@@ -184,16 +200,31 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $modifica = ($id != '');
 
         $titolo = $_POST['titolo'];
+
+        if ($titolo == '') {
+            die("Il titolo è obbligatorio");
+        }
+
         $anno = $_POST['anno'];
         
+        if($anno<1500 || $anno>date("Y")){
+            die("Anno non valido");
+        }
+
         $durata = null;
         if ($_POST['durata'] != '') {
             $durata = $_POST['durata'];
+            if($durata<10){
+                die("Durata non valida");
+            }
         }
 
         $ascolti = null;
-        if (isset($_POST['ascolti']) && $_POST['ascolti'] != '') {
+        if ($_POST['ascolti'] != '') {
             $ascolti = $_POST['ascolti'];
+            if($ascolti<0){
+                die("Ascolti non validi");
+            }
         }
 
         $esplicita = isset($_POST['esplicita']) ? 1 : 0;
@@ -285,6 +316,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $anno = $_POST['anno'];
             $genere = $_POST['genere'];
 
+            if ($titolo=='' || $genere=='') {
+                die("Titolo e genere sono obbligatori");
+            }
+
+            if($anno<1500 || $anno>date("Y")){
+                die("Anno non valido");
+            }
+
             //mantiente vecchiacopertina se non carico nulla di nuovo
             $copertina = $_POST['vecchiaCopertina'] ?? null;
 
@@ -295,7 +334,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 //sposta il file nel images
                 if (move_uploaded_file($_FILES['copertina']['tmp_name'], $cartella . $nomeFile)) {
                 //salva il nuovo percorso
-                $copertina = $cartella . $nomeFile;
+                $copertina =$nomeFile;
                 } else {
                     die("Errore durante lo spostamento della copertina");
                 }

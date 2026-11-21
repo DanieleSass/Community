@@ -49,7 +49,7 @@ $artisti = $query->fetchAll(PDO::FETCH_OBJ);
     <input type="text" name="titolo" placeholder="Titolo album"
         value="<?php echo htmlspecialchars($albumPreciso ? $albumPreciso->getTitolo() : ''); ?>" required>
 
-    <input type="number" name="anno" placeholder="Anno"
+    <input type="number" name="anno" placeholder="Anno" required min="1500" max="<?php echo date('Y'); ?>"
         value="<?php echo htmlspecialchars($albumPreciso ? $albumPreciso->getAnno() : ''); ?>" required>
 
     <input type="text" name="genere" placeholder="Genere"
